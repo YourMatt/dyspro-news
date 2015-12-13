@@ -7,7 +7,7 @@ class dn_shortcode_manager {
       $news_list = '';
       $news_items = dn_utilities::get_news_items ();
 
-      // show message for no events if none found
+      // show message for no news items if none found
       if (!$news_items) {
          return $this->build_no_news_message ();
       }
@@ -15,7 +15,7 @@ class dn_shortcode_manager {
       // display all news items
       foreach ($news_items as $news_item) {
 
-         $date = date ('l, M. jS', 0); //$news_item->meta['_date_start'][0]);
+         $date = date ('l, M. jS', strtotime ($news_item->post_date));
 
          // add the event
          $news_list .= '<li>';
@@ -26,7 +26,6 @@ class dn_shortcode_manager {
          $news_list .= '<div class="date">' . $date . '</div>';
          $news_list .= '<div class="description">' . $news_item->post_excerpt . '</div>';
          $news_list .= '<a class="details-link" href="' . $news_item->link . '"><span>Details</span></a>';
-         $news_list .= '<!-- ' . print_r ( $news_item, true ) . '-->';
          $news_list .= '</li>';
 
       }
