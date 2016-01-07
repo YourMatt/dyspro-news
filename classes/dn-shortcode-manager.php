@@ -17,15 +17,24 @@ class dn_shortcode_manager {
 
          $date = date ('l, M. jS', strtotime ($news_item->post_date));
 
-         // add the event
+         // format the url, overriding with a custom value if provided
+         $url = $news_item->link;
+         $target = '';
+         $custom_url = get_metadata ('post', $news_item->ID)["_dn_custom_url"][0];
+         if ($custom_url) {
+            $url = $custom_url;
+            $target = '_new';
+         }
+
+         // add the news item
          $news_list .= '<li>';
          if ($news_item->thumb) {
-            $news_list .= '<div class="event-photo"><a href="' . $news_item->link . '">' . $news_item->thumb . '</a></div>';
+            $news_list .= '<div class="event-photo"><a href="' . $url . '" target="' . $target . '">' . $news_item->thumb . '</a></div>';
          }
          $news_list .= '<h3 class="title">' . $news_item->post_title . '</h3>';
          $news_list .= '<div class="date">' . $date . '</div>';
          $news_list .= '<div class="description">' . $news_item->post_excerpt . '</div>';
-         $news_list .= '<a class="details-link" href="' . $news_item->link . '"><span>Details</span></a>';
+         $news_list .= '<a class="details-link" href="' . $url . '" target="' . $target . '"><span>Details</span></a>';
          $news_list .= '</li>';
 
       }

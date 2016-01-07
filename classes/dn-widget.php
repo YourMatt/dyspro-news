@@ -44,38 +44,25 @@ class dn_widget extends WP_Widget {
 
    function build_latest_news_item (&$news_item) {
 
+      $url = $news_item->link;
+      $target = '';
+      $custom_url = get_metadata ('post', $news_item->ID)["_dn_custom_url"][0];
+      if ($custom_url) {
+         $url = $custom_url;
+         $target = '_new';
+      }
+
       print '<div class="newswidget">';
       print '<div class="news-item">';
       if ($news_item->thumb) {
-         print '<a href="' . $news_item->link . '" class="thumb">' . $news_item->thumb . '</a>';
+         print '<a href="' . $url . '" target="' . $target . '" class="thumb">' . $news_item->thumb . '</a>';
       }
       print '<h4>' . $news_item->post_title . '</h4>';
       print $news_item->post_excerpt;
-      print '<a href="' . $news_item->link . '">View Details</a>';
+      print '<a href="' . $url . '" target="' . $target . '">View Details</a>';
       print '</div>';
       print '</div>';
 
-      // $news_item->post_title
-
-      /*
-       <div class="source">Provided by our Twitter feed</div>-->
-
-<div class="news-item"><a class="thumb" href="/wp-content/uploads/2014/10/PublicMeetingNo-1-Comment-Card.pdf" target="_new">
-   <img src="/wp-content/uploads/2014/10/PublicMeetingNo-1-Comment-Card-pdf.jpg"/></a>Download our 16th Street Fact Sheet for
-   information and a questionnaire regarding repairs for this roadway.<br/>
-   <a href="/wp-content/uploads/2014/10/PublicMeetingNo-1-Comment-Card.pdf" target="_new">Download Questionnaire</a></div>
-       */
-
-      /*
-      print '<div class="eventwidget">';
-      if ($event->thumb) {
-         print $event->thumb;
-      }
-      print '<h3>' . $event->post_excerpt . '</h3>';
-      print '<p>At ' . $event->meta['_del_name'][0] . ' in ' . $event->meta['_del_city'][0]  . ' on ' . $date . '.</p>';
-      print '<a href="' . $event->link . '">Event Details</a>';
-      print '</div>';
-      */
    }
 
    function update ($new_instance, $old_instance) {
