@@ -16,4 +16,5 @@ define ('DN_ADMIN_LINK_POSITION', 22);
 require_once (DN_BASE_PATH . '/classes/dn-utilities.php');
 require_once (DN_BASE_PATH . '/classes/dn-plugin-manager.php');
 require_once (DN_BASE_PATH . '/classes/dn-shortcode-manager.php');
+require_once (DN_BASE_PATH . '/classes/dn-options-manager.php');
 require_once (DN_BASE_PATH . '/classes/dn-widget.php');
