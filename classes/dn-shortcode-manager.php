@@ -1,4 +1,4 @@
-<?
+<?php
 
 class dn_shortcode_manager {
 
